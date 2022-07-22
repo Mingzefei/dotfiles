@@ -1,0 +1,7 @@
+# Useful `.gitignore` templates:
+# https://github.com/github/gitignore
+
+# VIM
+
+*.sw[a-z]
+*.un~

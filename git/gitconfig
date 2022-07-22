@@ -1,0 +1,10 @@
+[https]
+	proxy = 127.0.0.1:7890
+[http]
+	proxy = 127.0.0.1:7890
+[core]
+	quotepath = false
+    editor = vim
+    excludesFile = ~/.gitignore
+[include]
+    path = ~/.gitconfig.local

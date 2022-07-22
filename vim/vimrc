@@ -1,0 +1,143 @@
+"""basic setting
+let mapleader=" "
+set nocompatible " for some old bugs
+set encoding=utf-8
+set updatetime=100
+set mouse=a
+set autochdir " auto mv to current file's dir
+set hidden " change buffer with file unsave
+filetype on
+set vb t_vb= " no error bell
+
+"""show setting
+set number
+set relativenumber
+set cursorline " high light current line
+set scrolloff=6 " 6 lines free for bottom and top
+if &term =~ "xterm" " Set cursor shape and color
+    " INSERT mode
+    let &t_SI = "\<Esc>[6 q" 
+    " REPLACE mode
+    let &t_SR = "\<Esc>[3 q"
+    " NORMAL mode
+    let &t_EI = "\<Esc>[2 q"
+endif
+
+"""tab, indent and fold
+set smartindent " indent smartly when start a new line
+set backspace=indent,eol,start " for delete bug
+set tabstop=4 " tab equal to 4 space
+set shiftwidth=4 " << >> equal to 4 space
+set expandtab
+set softtabstop=4 " del 4 space at one time
+set foldmethod=indent
+set foldlevelstart=99
+nnoremap <tab> za
+
+"""search and highline
+set wildmenu
+set hlsearch
+exec "nohlsearch"
+set incsearch " show search results while input /char
+set ignorecase
+set smartcase
+nnoremap /<CR> :nohlsearch<CR>
+nnoremap n nzz
+nnoremap N Nzz
+
+"""relax map
+nnoremap j gj
+nnoremap k gk
+inoremap jk <ESC>
+nnoremap <leader>q :q<CR>
+nnoremap <leader>w :w<CR>
+nnoremap ; :
+"" >_<
+map <leader><tab> <esc>/>_<<CR>:nohlsearch<CR>c3l
+source ~/.vim/my_snippets/my_vim_snippets
+"" fy word (need fanyi)
+nmap <Leader>y :!fanyi <C-R><C-W><CR>
+"" spell check
+nnoremap <leader>s :set spell!<CR>
+"" clip.exe for wsl1
+if system('uname -r') =~ "Microsoft"
+    augroup Yank
+    autocmd!
+    autocmd TextYankPost * :call system('/mnt/c/windows/system32/clip.exe ',@")
+    augroup END
+endif
+"" clip.exe for wsl2
+" if system('uname -r') =~ "microsoft"
+"     augroup Yank
+"     autocmd!
+"     autocmd TextYankPost * :call system('/mnt/c/windows/system32/clip.exe ',@")
+"     augroup END
+" endif
+
+" Plug
+call plug#begin('~/.vim/plugged')
+
+    " git
+    Plug 'airblade/vim-gitgutter'
+    nmap <leader>hh :GitGutterToggle<CR>
+    Plug 'tpope/vim-fugitive'
+
+    " Tagbar 
+    Plug 'majutsushi/tagbar'
+    map <leader>t :TagbarToggle<CR>
+
+    " NERDTree
+    Plug 'scrooloose/nerdtree'
+    map <leader>f :NERDTreeToggle<CR>
+    let NERDTreeShowHidden=1
+    
+    " fzf
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf.vim'
+
+    " markdown
+    Plug 'godlygeek/tabular' 
+    Plug 'plasticboy/vim-markdown'
+    let g:tagbar_type_markdown = {'ctagstype' : 'markdown', 'kinds' : ['h:headings',],'sort' : 0}
+    let g:vim_markdown_list_item_indent = 2
+    Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
+    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'}
+    let g:mkdp_browser = 'chrome.exe'
+    nmap <leader>mv :MarkdownPreview<CR>
+    nmap <leader>mx :StopMarkdownPreview<CR>
+    Plug 'ferrine/md-img-paste.vim'
+    autocmd FileType markdown nmap <buffer><silent> <leader>mp :call mdip#MarkdownClipboardImage()<CR>
+
+    " conquer of completion
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    " Use <C-j> and <C-k> to navigate the completion list
+    inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+    inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+	  inoremap <silent><expr> <TAB>
+	      \ pumvisible() ? coc#_select_confirm() :
+	      \ coc#expandableOrJumpable() ?
+	      \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+	      \ <SID>check_back_space() ? "\<TAB>" :
+	      \ coc#refresh()
+    function! s:check_back_space() abort
+        let col = col('.') - 1
+        return !col || getline('.')[col - 1] =~# '\s'
+    endfunction
+	  let g:coc_snippet_next = '<tab>'
+
+    " snippets
+    Plug 'honza/vim-snippets'
+    let g:UltiSnipsSnippetDirectories=["UltiSnips","my_snippets"]
+
+    " chinese
+    " Plug 'Leiyi548/vim-im-select'
+    
+    " themes
+    Plug 'vim-airline/vim-airline'
+    Plug 'tomasiser/vim-code-dark'
+    let g:airline_theme = 'codedark'
+    
+call plug#end()
+
+colorscheme codedark
+
