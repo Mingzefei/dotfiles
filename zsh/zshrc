@@ -119,8 +119,28 @@ alias ra=ranger
 alias tnew='tmux new -s'
 # WSL .exe 
 alias cl='clip.exe'
-# display
-export DISPLAY=127.0.0.1:0.0
+# WSL proxy (using clash)
+# export hostip=$(ifconfig lo | grep -oP '(?<=inet\ ).+(?=\ \ netmask)') # WSL1
+export hostip=$(cat /etc/resolv.conf |grep -oP '(?<=nameserver\ ).*') # WSL2
+export proxyPort=7890
+alias proxy='  
+    export https_proxy="http://${hostip}:${proxyPort}";
+    export http_proxy="http://${hostip}:${proxyPort}";
+    export all_proxy="http://${hostip}:${proxyPort}";
+    echo -e "Acquire::http::Proxy \"http://${hostip}:${proxyPort}\";" | sudo tee -a /etc/apt/apt.conf.d/proxy.conf > /dev/null;
+    echo -e "Acquire::https::Proxy \"http://${hostip}:${proxyPort}\";" | sudo tee -a /etc/apt/apt.conf.d/proxy.conf > /dev/null;
+'
+alias unproxy='
+unset https_proxy;
+unset http_proxy;
+unset all_proxy;
+sudo sed -i -e "/Acquire::http::Proxy/d" /etc/apt/apt.conf.d/proxy.conf;
+sudo sed -i -e "/Acquire::https::Proxy/d" /etc/apt/apt.conf.d/proxy.conf;
+'
+# WSL2 CUDA
+export LD_LIBRARY_PATH=/usr/lib/wsl/lib:$LD_LIBRARY_PATH
+# WSL2 display (using x410)
+export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

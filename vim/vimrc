@@ -56,7 +56,9 @@ nnoremap ; :
 map <leader><tab> <esc>/>_<<CR>:nohlsearch<CR>c3l
 source ~/.vim/my_snippets/my_vim_snippets
 "" fy word (need fanyi)
-nmap <Leader>y :!fanyi <C-R><C-W><CR>
+nmap <Leader>yy :!fanyi <C-R><C-W><CR>
+" fanyi input word(s)
+nmap <Leader>yi :!fanyi 
 "" spell check
 nnoremap <leader>s :set spell!<CR>
 "" clip.exe for wsl1
@@ -134,6 +136,12 @@ call plug#begin('~/.vim/plugged')
 
     " chinese
     " Plug 'Leiyi548/vim-im-select'
+
+    " translater
+    " Plug 'ianva/vim-youdao-translater'
+    " vnoremap <silent> <leader>yy :<C-u>Ydv<CR>
+    " nnoremap <silent> <leader>yy :<C-u>Ydc<CR>
+    " noremap <leader>yi :<C-u>Yde<CR>
     
     " themes
     Plug 'vim-airline/vim-airline'
