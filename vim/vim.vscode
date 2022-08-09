@@ -1,0 +1,80 @@
+"""basic setting
+let mapleader=" "
+set nocompatible " for some old bugs
+set encoding=utf-8
+set updatetime=100
+set mouse=a
+set autochdir " auto mv to current file's dir
+set hidden " change buffer with file unsave
+filetype on
+set vb t_vb= " no error bell
+
+"""show setting
+set number
+set relativenumber
+set cursorline " high light current line
+set scrolloff=6 " 6 lines free for bottom and top
+if &term =~ "xterm" " Set cursor shape and color
+    " INSERT mode
+    let &t_SI = "\<Esc>[6 q" 
+    " REPLACE mode
+    let &t_SR = "\<Esc>[3 q"
+    " NORMAL mode
+    let &t_EI = "\<Esc>[2 q"
+endif
+
+"""tab, indent and fold
+set smartindent " indent smartly when start a new line
+set backspace=indent,eol,start " for delete bug
+set tabstop=4 " tab equal to 4 space
+set shiftwidth=4 " << >> equal to 4 space
+set expandtab
+set softtabstop=4 " del 4 space at one time
+set foldmethod=indent
+set foldlevelstart=99
+nnoremap <tab> za
+
+"""search and highline
+set wildmenu
+set hlsearch
+exec "nohlsearch"
+set incsearch " show search results while input /char
+set ignorecase
+set smartcase
+nnoremap /<CR> :nohlsearch<CR>
+nnoremap n nzz
+nnoremap N Nzz
+
+"""relax map
+nnoremap j gj
+nnoremap k gk
+inoremap jk <ESC>
+nnoremap <leader>q :q<CR>
+nnoremap <leader>w :w<CR>
+nnoremap ; :
+"" >_<
+map <leader><tab> <esc>/>_<<CR>:nohlsearch<CR>c3l
+""" markdown
+autocmd Filetype markdown inoremap ,<tab> <esc>/>_<<CR>:nohlsearch<CR>c3l
+autocmd Filetype markdown inoremap ,b **** >_<<esc>F*hi
+autocmd Filetype markdown inoremap ,s ~~~~ >_<<esc>F~hi
+autocmd Filetype markdown inoremap ,i ** >_<<esc>F*i
+autocmd Filetype markdown inoremap ,c `` >_<<esc>F`i
+autocmd Filetype markdown inoremap ,C ```<Enter>>_<<Enter>```<Enter><Enter>>_<<esc>4kA
+autocmd Filetype markdown inoremap ,e $$ >_<<esc>F$i
+autocmd Filetype markdown inoremap ,E $$<Enter><Enter>$$<Enter><Enter>>_<<esc>3kA
+autocmd Filetype markdown inoremap ,h ==== >_<<esc>F=hi
+autocmd Filetype markdown inoremap ,p ![](>_<) >_<<esc>F]i
+autocmd Filetype markdown inoremap ,a [](>_<) >_<<esc>F]i
+autocmd Filetype markdown inoremap ,l --------<Enter>
+autocmd Filetype markdown inoremap ,1 # <Enter><Enter>>_<<esc>2kA
+autocmd Filetype markdown inoremap ,2 ## <Enter><Enter>>_<<esc>2kA
+autocmd Filetype markdown inoremap ,3 ### <Enter><Enter>>_<<esc>2kA
+autocmd Filetype markdown inoremap ,4 #### <Enter><Enter>>_<<esc>2kA
+"" fy word (need fanyi)
+" nmap <Leader>yy :!fanyi <C-R><C-W><CR>
+" fanyi input word(s)
+" nmap <Leader>yi :!fanyi 
+"" spell check
+nnoremap <leader>s :set spell!<CR>
+
