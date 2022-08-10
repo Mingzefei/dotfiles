@@ -1,3 +1,10 @@
+"
+" This dotfile is for VSCodeVim, a vim emulator for VSCode.
+" Create from vimrc in WSL2 Ubuntu-20.04 vim.
+" #TODO: plug, >_< function
+"
+
+
 """basic setting
 let mapleader=" "
 set nocompatible " for some old bugs
