@@ -1,0 +1,12 @@
+{
+    "coc.preferences.extensionUpdateCheck": "daily",
+    "suggest.noselect": true,
+    "suggest.enablePreselect": false,
+    "codeLens.enable": true,
+    "list.previousKeymap": "<C-k>",
+    "list.nextKeymap": "<C-j>",
+    "coc.preferences.formatOnSaveFiletypes": [
+        "json"
+    ],
+    "python.jediEnabled": false
+}
