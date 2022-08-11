@@ -1,4 +1,4 @@
-
+" This dotfile is for Ubuntu-20.04 nvim in WS2.
 " Create from vimrc in WSL2 Ubuntu-20.04
 
 """basic setting
@@ -283,6 +283,17 @@ call plug#begin('~/.config/nvim/plugged')
     " equal to <tab> in vscode
     imap <C-j> <Plug>(coc-snippets-expand-jump)
 
+    " " coc-translator
+    " let g:coc_global_extensions=['coc-translator']
+    " " popup
+    " nmap <Leader>yy <Plug>(coc-translator-p)
+    " vmap <Leader>yy <Plug>(coc-translator-pv)
+    " " echo
+    " nmap <Leader>ye <Plug>(coc-translator-e)
+    " nmap <Leader>ye <Plug>(coc-translator-ev)
+    " " replace
+    " nmap <Leader>yr <Plug>(coc-translator-r)
+    " nmap <Leader>yr <Plug>(coc-translator-rv)
 
     " snippets
     Plug 'honza/vim-snippets'
@@ -290,12 +301,6 @@ call plug#begin('~/.config/nvim/plugged')
 
     " chinese
     " Plug 'Leiyi548/vim-im-select'
-
-    " translater
-    " Plug 'ianva/vim-youdao-translater'
-    " vnoremap <silent> <leader>yy :<C-u>Ydv<CR>
-    " nnoremap <silent> <leader>yy :<C-u>Ydc<CR>
-    " noremap <leader>yi :<C-u>Yde<CR>
     
     " themes
     Plug 'vim-airline/vim-airline'

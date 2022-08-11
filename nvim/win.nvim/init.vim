@@ -55,15 +55,20 @@ inoremap jk <ESC>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>w :w<CR>
 nnoremap ; :
+
 "" >_<
 map <leader><tab> <esc>/>_<<CR>:nohlsearch<CR>c3l
 source ~\AppData\Local\nvim\my_snippets\my_vim_snippets
+
 "" fy word (need fanyi)
 " nmap <Leader>yy :!fanyi <C-R><C-W><CR>
 " fanyi input word(s)
 " nmap <Leader>yi :!fanyi 
+" win using coc-translator
+
 "" spell check
 nnoremap <leader>s :set spell!<CR>
+
 "" clip.exe for win10
 if system('uname -r') =~ "microsoft"
     augroup Yank
@@ -71,6 +76,64 @@ if system('uname -r') =~ "microsoft"
     autocmd TextYankPost * :call system('C:\Windows\System32\clip.exe ',@")
     augroup END
 endif
+
+" Compile function
+noremap <leader>r :call CompileRunGcc()<CR>
+func! CompileRunGcc()
+	exec "w"
+	if &filetype == 'c'
+		set splitbelow
+		:sp
+		:res -5
+		term gcc % -o %< && time ./%<
+	elseif &filetype == 'cpp'
+		set splitbelow
+		exec "!g++ -std=c++11 % -Wall -o %<"
+		:sp
+		:res -15
+		:term ./%<
+	elseif &filetype == 'cs'
+		set splitbelow
+		silent! exec "!mcs %"
+		:sp
+		:res -5
+		:term mono %<.exe
+	elseif &filetype == 'java'
+		set splitbelow
+		:sp
+		:res -5
+		term javac % && time java %<
+	elseif &filetype == 'sh'
+		:!time bash %
+	elseif &filetype == 'python'
+		set splitbelow
+		:sp
+		:term python3 %
+	elseif &filetype == 'html'
+		silent! exec "!".g:mkdp_browser." % &"
+	elseif &filetype == 'markdown'
+		exec "InstantMarkdownPreview"
+	elseif &filetype == 'tex'
+		silent! exec "VimtexStop"
+		silent! exec "VimtexCompile"
+	elseif &filetype == 'dart'
+		exec "CocCommand flutter.run -d ".g:flutter_default_device." ".g:flutter_run_args
+		silent! exec "CocCommand flutter.dev.openDevLog"
+	elseif &filetype == 'javascript'
+		set splitbelow
+		:sp
+		:term export DEBUG="INFO,ERROR,WARNING"; node --trace-warnings .
+	elseif &filetype == 'racket'
+		set splitbelow
+		:sp
+		:res -5
+		term racket %
+	elseif &filetype == 'go'
+		set splitbelow
+		:sp
+		:term go run .
+	endif
+endfunc
 
 " Plug
 call plug#begin('~/AppData/Local/nvim/plugged')
@@ -111,79 +174,120 @@ call plug#begin('~/AppData/Local/nvim/plugged')
 
     " conquer of completion
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    let g:coc_global_extensions = [
-                \ 'coc-json',
-                \ 'coc-vimlsp',]
-    " Use tab for trigger completion with characters ahead and navigate.
-    " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-    " other plugin before putting this into your config.
-    inoremap <silent><expr> <TAB>
-          \ coc#pum#visible() ? coc#pum#next(1):
-          \ CheckBackspace() ? "\<Tab>" :
-          \ coc#refresh()
-    inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
-    " Make <CR> to accept selected completion item or notify coc.nvim to format
-    " <C-g>u breaks current undo, please make your own choice.
-    inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                                  \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+   let g:coc_global_extensions = [
+        \'coc-marketplace',
+        \'coc-prettier',
+        \'coc-explorer',
+        \'coc-snippets',
+        \'coc-json', 
+        \'coc-markdownlint',
+        \'coc-texlab',
+        \'coc-vimlsp',
+        \'coc-tsserver',
+        \'coc-python',
+        \'coc-pyright',
+        \'coc-clangd',
+        \'coc-cmake',]
 
-    function! CheckBackspace() abort
-      let col = col('.') - 1
-      return !col || getline('.')[col - 1]  =~# '\s'
-    endfunction
+   " Use tab for trigger completion with characters ahead and navigate.
+   " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+   " other plugin before putting this into your config.
+   inoremap <silent><expr> <TAB>
+         \ coc#pum#visible() ? coc#pum#next(1):
+         \ CheckBackspace() ? "\<Tab>" :
+         \ coc#refresh()
+   inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
-    " Use <C-o> to trigger completion.
-    inoremap <silent><expr> <C-o> coc#refresh()
+   " Make <CR> to accept selected completion item or notify coc.nvim to format
+   " <C-g>u breaks current undo, please make your own choice.
+   inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                                 \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-    " Use `<Leader>-` and `<Leader>=` to navigate diagnostics
-    " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-    nmap <silent> <leader>- <Plug>(coc-diagnostic-prev)
-    nmap <silent> <Leader>= <Plug>(coc-diagnostic-next)
+   function! CheckBackspace() abort
+     let col = col('.') - 1
+     return !col || getline('.')[col - 1]  =~# '\s'
+   endfunction
 
-    " GoTo code navigation.
-    nmap <silent> gd <Plug>(coc-definition)
-    nmap <silent> gy <Plug>(coc-type-definition)
-    nmap <silent> gi <Plug>(coc-implementation)
-    nmap <silent> gr <Plug>(coc-references)
-    
-    " Use <Leader>d to show documentation in preview window.
-    nnoremap <silent> <leader>d :call ShowDocumentation()<CR>
+   " Use <C-j> and <C-k> to navigate the completion list
+   inoremap <silent><expr> <C-j> coc#pum#visible() ? coc#pum#next(1) : "\<C-j>"
+   inoremap <silent><expr> <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-k>"
 
-    function! ShowDocumentation()
-      if CocAction('hasProvider', 'hover')
-        call CocActionAsync('doHover')
-      else
-        call feedkeys('/<Leader>d', 'in')
-      endif
-    endfunction
+   " Use <C-o> to trigger completion.
+   inoremap <silent><expr> <C-o> coc#refresh()
 
-   " Highlight the symbol and its references when holding the cursor.
-    autocmd CursorHold * silent call CocActionAsync('highlight')
+   " Use `<Leader>-` and `<Leader>=` to navigate diagnostics
+   " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+   nmap <silent> <leader>- <Plug>(coc-diagnostic-prev)
+   nmap <silent> <Leader>= <Plug>(coc-diagnostic-next)
 
-    " Symbol renaming.
-    " nmap <leader>rn <Plug>(coc-rename)
-        
-    " Formatting selected code.
-    " xmap <leader>f  <Plug>(coc-format-selected)
-    " nmap <leader>f  <Plug>(coc-format-selected)
+   " GoTo code navigation.
+   nmap <silent> gd <Plug>(coc-definition)
+   nmap <silent> gy <Plug>(coc-type-definition)
+   nmap <silent> gi <Plug>(coc-implementation)
+   nmap <silent> gr <Plug>(coc-references)
+   
+   " Use <Leader>d to show documentation in preview window.
+   nnoremap <silent> <leader>d :call ShowDocumentation()<CR>
+
+   function! ShowDocumentation()
+     if CocAction('hasProvider', 'hover')
+       call CocActionAsync('doHover')
+     else
+       call feedkeys('/<Leader>d', 'in')
+     endif
+   endfunction
+
+  " Highlight the symbol and its references when holding the cursor.
+   autocmd CursorHold * silent call CocActionAsync('highlight')
+
+   " Symbol renaming.
+   " nmap <leader>rn <Plug>(coc-rename)
+       
+   " Formatting selected code.
+    xmap <leader>f  <Plug>(coc-format-selected)
+    nmap <leader>f  <Plug>(coc-format-selected)
 
     augroup mygroup
-      autocmd!
-      " Setup formatexpr specified filetype(s).
-      autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-      " Update signature help on jump placeholder.
-      autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-    augroup end
+     autocmd!
+     " Setup formatexpr specified filetype(s).
+     autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+     " Update signature help on jump placeholder.
+     autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+    augroup en
 
     " Applying codeAction to the selected region.
     " Example: `<leader>aap` for current paragraph
     xmap <leader>a  <Plug>(coc-codeaction-selected)
     nmap <leader>a  <Plug>(coc-codeaction-selected)
 
-    " Use <C-j> and <C-k> to navigate the completion list
-    inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
-    inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+    " coc-explorer: open explorer by <leader>e
+    nnoremap <leader>e :CocCommand explorer<CR>
+
+    " coc-snippets
+    " Use <C-l> for trigger snippet expand.
+    imap <C-l> <Plug>(coc-snippets-expand)
+    " Use <C-j> for select text for visual placeholder of snippet.
+    vmap <C-j> <Plug>(coc-snippets-select)
+    " Use <C-j> for jump to next placeholder, it's default of coc.nvim
+    let g:coc_snippet_next = '<c-j>'
+    " Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+    let g:coc_snippet_prev = '<c-k>'
+    " Use <C-j> for both expand and jump (make expand higher priority.)
+    " equal to <tab> in vscode
+    imap <C-j> <Plug>(coc-snippets-expand-jump)
+
+    " coc-translator
+    let g:coc_global_extensions=['coc-translator']
+    " popup
+    nmap <Leader>yy <Plug>(coc-translator-p)
+    vmap <Leader>yy <Plug>(coc-translator-pv)
+    " echo
+    nmap <Leader>ye <Plug>(coc-translator-e)
+    nmap <Leader>ye <Plug>(coc-translator-ev)
+    " replace
+    nmap <Leader>yr <Plug>(coc-translator-r)
+    nmap <Leader>yr <Plug>(coc-translator-rv)
 
     " snippets
     Plug 'honza/vim-snippets'
@@ -191,12 +295,6 @@ call plug#begin('~/AppData/Local/nvim/plugged')
 
     " chinese
     " Plug 'Leiyi548/vim-im-select'
-
-    " translater
-    " Plug 'ianva/vim-youdao-translater'
-    " vnoremap <silent> <leader>yy :<C-u>Ydv<CR>
-    " nnoremap <silent> <leader>yy :<C-u>Ydc<CR>
-    " noremap <leader>yi :<C-u>Yde<CR>
     
     " themes
     Plug 'vim-airline/vim-airline'
@@ -206,4 +304,6 @@ call plug#begin('~/AppData/Local/nvim/plugged')
 call plug#end()
 
 colorscheme codedark
+
+
 
