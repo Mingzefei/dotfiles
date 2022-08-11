@@ -136,7 +136,7 @@ func! CompileRunGcc()
 endfunc
 
 " Plug
-call plug#begin('~/AppData/Local/nvim/plugged')
+call plug#begin('~\AppData\Local\nvim\plugged')
 
     " git
     Plug 'airblade/vim-gitgutter'
@@ -148,9 +148,9 @@ call plug#begin('~/AppData/Local/nvim/plugged')
     map <leader>t :TagbarToggle<CR>
 
     " NERDTree
-    Plug 'scrooloose/nerdtree'
-    map <leader>f :NERDTreeToggle<CR>
-    let NERDTreeShowHidden=1
+    " Plug 'scrooloose/nerdtree'
+    " map <leader>f :NERDTreeToggle<CR>
+    " let NERDTreeShowHidden=1
     
     " fzf
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -278,7 +278,7 @@ call plug#begin('~/AppData/Local/nvim/plugged')
     imap <C-j> <Plug>(coc-snippets-expand-jump)
 
     " coc-translator
-    let g:coc_global_extensions=['coc-translator']
+    " :CocInstall coc-translator
     " popup
     nmap <Leader>yy <Plug>(coc-translator-p)
     vmap <Leader>yy <Plug>(coc-translator-pv)
