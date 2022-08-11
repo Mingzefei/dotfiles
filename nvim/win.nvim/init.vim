@@ -1,6 +1,5 @@
-" This dotfile is for Win10 nvim in Powershell.
+" This dotfile is for Win11 nvim in Powershell.
 " Create from vimrc in WSL2 Ubuntu-20.04
-" #TODO: plug
 
 """basic setting
 let mapleader=" "
@@ -60,25 +59,11 @@ nnoremap ; :
 map <leader><tab> <esc>/>_<<CR>:nohlsearch<CR>c3l
 source ~\AppData\Local\nvim\my_snippets\my_vim_snippets
 "" fy word (need fanyi)
-nmap <Leader>yy :!fanyi <C-R><C-W><CR>
+" nmap <Leader>yy :!fanyi <C-R><C-W><CR>
 " fanyi input word(s)
-nmap <Leader>yi :!fanyi 
+" nmap <Leader>yi :!fanyi 
 "" spell check
 nnoremap <leader>s :set spell!<CR>
-"" clip.exe for wsl1
-" if system('uname -r') =~ "Microsoft"
-"     augroup Yank
-"     autocmd!
-"     autocmd TextYankPost * :call system('/mnt/c/windows/system32/clip.exe ',@")
-"     augroup END
-" endif
-"" clip.exe for wsl2
-" if system('uname -r') =~ "microsoft"
-"     augroup Yank
-"     autocmd!
-"     autocmd TextYankPost * :call system('/mnt/c/windows/system32/clip.exe ',@")
-"     augroup END
-" endif
 "" clip.exe for win10
 if system('uname -r') =~ "microsoft"
     augroup Yank

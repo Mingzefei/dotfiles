@@ -1,0 +1,20 @@
+""" >_<
+" <leader><tab> mv to >_< under normal
+
+""" markdown
+autocmd Filetype markdown inoremap ,<tab> <esc>/>_<<CR>:nohlsearch<CR>c3l
+autocmd Filetype markdown inoremap ,b **** >_<<esc>F*hi
+autocmd Filetype markdown inoremap ,s ~~~~ >_<<esc>F~hi
+autocmd Filetype markdown inoremap ,i ** >_<<esc>F*i
+autocmd Filetype markdown inoremap ,c `` >_<<esc>F`i
+autocmd Filetype markdown inoremap ,C ```<Enter>>_<<Enter>```<Enter><Enter>>_<<esc>4kA
+autocmd Filetype markdown inoremap ,e $$ >_<<esc>F$i
+autocmd Filetype markdown inoremap ,E $$<Enter><Enter>$$<Enter><Enter>>_<<esc>3kA
+autocmd Filetype markdown inoremap ,h ==== >_<<esc>F=hi
+autocmd Filetype markdown inoremap ,p ![](>_<) >_<<esc>F]i
+autocmd Filetype markdown inoremap ,a [](>_<) >_<<esc>F]i
+autocmd Filetype markdown inoremap ,l --------<Enter>
+autocmd Filetype markdown inoremap ,1 # <Enter><Enter>>_<<esc>2kA
+autocmd Filetype markdown inoremap ,2 ## <Enter><Enter>>_<<esc>2kA
+autocmd Filetype markdown inoremap ,3 ### <Enter><Enter>>_<<esc>2kA
+autocmd Filetype markdown inoremap ,4 #### <Enter><Enter>>_<<esc>2kA

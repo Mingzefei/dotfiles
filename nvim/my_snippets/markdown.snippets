@@ -1,0 +1,21 @@
+snippet header "init a markdown file" b
+# ${1:title}
+
+--------
+
+@File : `!p snip.rv = snip.fn`
+@Time : `date +'%Y/%m/%d %H:%M:%S'`
+@Auth : Ming(<3057761608@qq.com>)
+@Vers : 0.1
+@Desc : ${2:None}
+@Refe : ${3:url1}; ${4:url2}
+
+--------
+
+${5}
+endsnippet
+
+snippet cd "code in line"
+\`$1\` $2
+endsnippet
+	
