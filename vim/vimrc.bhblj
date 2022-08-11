@@ -1,0 +1,136 @@
+" This dotfile is for vim in bhblj.
+" Create from vimrc in WSL2 Ubuntu-20.04
+" Ming(3057761608@qq.com)
+
+"""basic setting
+let mapleader=" "
+set nocompatible " for some old bugs
+set encoding=utf-8
+set updatetime=100
+set mouse=a
+set autochdir " auto mv to current file's dir
+set hidden " change buffer with file unsave
+filetype on
+set vb t_vb= " no error bell
+
+"""show setting
+set number
+set relativenumber
+set cursorline " high light current line
+set scrolloff=6 " 6 lines free for bottom and top
+
+"""tab, indent and fold
+set smartindent " indent smartly when start a new line
+set backspace=indent,eol,start " for delete bug
+set tabstop=4 " tab equal to 4 space
+set shiftwidth=4 " << >> equal to 4 space
+set expandtab
+set softtabstop=4 " del 4 space at one time
+set foldmethod=indent
+set foldlevelstart=99
+nnoremap <tab> za
+
+"""search and highline
+set wildmenu
+set hlsearch
+exec "nohlsearch"
+set incsearch " show search results while input /char
+set ignorecase
+set smartcase
+nnoremap /<CR> :nohlsearch<CR>
+nnoremap n nzz
+nnoremap N Nzz
+
+"""relax map
+nnoremap j gj
+nnoremap k gk
+inoremap jk <ESC>
+vnoremap jk <ESC>
+nnoremap <leader>q :q<CR>
+nnoremap <leader>w :w<CR>
+nnoremap ; :
+
+"" >_<
+map <leader><tab> <esc>/>_<<CR>:nohlsearch<CR>c3l
+" source ~/.vim/my_snippets/my_vim_snippets
+
+"" spell check
+nnoremap <leader>s :set spell!<CR>
+
+" Compile function
+" noremap <leader>r :call CompileRunGcc()<CR>
+func! CompileRunGcc()
+	exec "w"
+	if &filetype == 'c'
+		set splitbelow
+		:sp
+		:res -5
+		term gcc % -o %< && time ./%<
+	elseif &filetype == 'cpp'
+		set splitbelow
+		exec "!g++ -std=c++11 % -Wall -o %<"
+		:sp
+		:res -15
+		:term ./%<
+	elseif &filetype == 'cs'
+		set splitbelow
+		silent! exec "!mcs %"
+		:sp
+		:res -5
+		:term mono %<.exe
+	elseif &filetype == 'java'
+		set splitbelow
+		:sp
+		:res -5
+		term javac % && time java %<
+	elseif &filetype == 'sh'
+		:!time bash %
+	elseif &filetype == 'python'
+		set splitbelow
+		:sp
+		:term python3 %
+	elseif &filetype == 'html'
+		silent! exec "!".g:mkdp_browser." % &"
+	elseif &filetype == 'markdown'
+		exec "InstantMarkdownPreview"
+	elseif &filetype == 'tex'
+		silent! exec "VimtexStop"
+		silent! exec "VimtexCompile"
+	elseif &filetype == 'dart'
+		exec "CocCommand flutter.run -d ".g:flutter_default_device." ".g:flutter_run_args
+		silent! exec "CocCommand flutter.dev.openDevLog"
+	elseif &filetype == 'javascript'
+		set splitbelow
+		:sp
+		:term export DEBUG="INFO,ERROR,WARNING"; node --trace-warnings .
+	elseif &filetype == 'racket'
+		set splitbelow
+		:sp
+		:res -5
+		term racket %
+	elseif &filetype == 'go'
+		set splitbelow
+		:sp
+		:term go run .
+	endif
+endfunc
+
+" Plug
+call plug#begin('~/.vim/plugged')
+
+    " Tagbar 
+    Plug 'majutsushi/tagbar'
+    map <leader>t :TagbarToggle<CR>
+
+    " " NERDTree (replace by coc-explorer
+    Plug 'scrooloose/nerdtree'
+    map <leader>f :NERDTreeToggle<CR>
+    let NERDTreeShowHidden=1
+
+    
+call plug#end()
+
+" colorscheme codedark
+" colorscheme murphy
+
+

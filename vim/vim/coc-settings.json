@@ -1,3 +1,20 @@
 {
-    "python.jediEnable": false
+  "coc.preferences.extensionUpdateCheck": "daily",
+  "suggest.noselect": true,
+  "suggest.enablePreselect": false,
+  "codeLens.enable": true,
+  "list.previousKeymap": "<C-k>",
+  "list.nextKeymap": "<C-j>",
+  "coc.preferences.formatOnSaveFiletypes": ["json"],
+  "python.jediEnabled": false,
+
+  "explorer.file.column.indent.indentLine": true,
+  "explorer.file.showHiddenFiles": true,
+  "explorer.icon.enableNerdfont": false,
+  "explorer.git.showIgnored": true,
+
+  "snippets.ultisnips.directories": [
+    "UltiSnips",
+    "~/.config/nvim/my_snippets/",
+    "~/.config/nvim/plugged/vim-snippets/"]
 }

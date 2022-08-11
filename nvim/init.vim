@@ -70,19 +70,19 @@ nmap <Leader>yi :!fanyi
 nnoremap <leader>s :set spell!<CR>
 
 "" clip.exe for wsl1
-if system('uname -r') =~ "Microsoft"
-    augroup Yank
-    autocmd!
-    autocmd TextYankPost * :call system('/mnt/c/windows/system32/clip.exe ',@")
-    augroup END
-endif
-"" clip.exe for wsl2
-" if system('uname -r') =~ "microsoft"
+" if system('uname -r') =~ "Microsoft"
 "     augroup Yank
 "     autocmd!
 "     autocmd TextYankPost * :call system('/mnt/c/windows/system32/clip.exe ',@")
 "     augroup END
 " endif
+"" clip.exe for wsl2
+if system('uname -r') =~ "microsoft"
+    augroup Yank
+    autocmd!
+    autocmd TextYankPost * :call system('/mnt/c/windows/system32/clip.exe ',@")
+    augroup END
+endif
 
 " Compile function
 noremap <leader>r :call CompileRunGcc()<CR>
@@ -284,7 +284,7 @@ call plug#begin('~/.config/nvim/plugged')
     imap <C-j> <Plug>(coc-snippets-expand-jump)
 
     " " coc-translator
-    " let g:coc_global_extensions=['coc-translator']
+    " :CocInstall coc-translator
     " " popup
     " nmap <Leader>yy <Plug>(coc-translator-p)
     " vmap <Leader>yy <Plug>(coc-translator-pv)
