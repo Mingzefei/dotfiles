@@ -117,6 +117,7 @@ source $ZSH/oh-my-zsh.sh
 alias fd=fdfind
 alias ra=ranger
 alias tnew='tmux new -s'
+alias ta='tmux attach -t'
 # WSL .exe 
 alias cl='clip.exe'
 # WSL proxy (using clash)
@@ -131,12 +132,15 @@ alias proxy='
     echo -e "Acquire::https::Proxy \"http://${hostip}:${proxyPort}\";" | sudo tee -a /etc/apt/apt.conf.d/proxy.conf > /dev/null;
 '
 alias unproxy='
-unset https_proxy;
-unset http_proxy;
-unset all_proxy;
-sudo sed -i -e "/Acquire::http::Proxy/d" /etc/apt/apt.conf.d/proxy.conf;
-sudo sed -i -e "/Acquire::https::Proxy/d" /etc/apt/apt.conf.d/proxy.conf;
+    unset https_proxy;
+    unset http_proxy;
+    unset all_proxy;
+    sudo sed -i -e "/Acquire::http::Proxy/d" /etc/apt/apt.conf.d/proxy.conf;
+    sudo sed -i -e "/Acquire::https::Proxy/d" /etc/apt/apt.conf.d/proxy.conf;
 '
+# hugo
+alias hugo-server='echo "http://localhost:8000" && hugo server --bind 0.0.0.0 --baseURL=http://0.0.0.0 -p 8000'
+# alias hugo-server='hugo server --bind ${hostip} --baseURL=http://${hostip} -p 1420'
 # WSL2 CUDA
 export LD_LIBRARY_PATH=/usr/lib/wsl/lib:$LD_LIBRARY_PATH
 # WSL2 display (using x410)

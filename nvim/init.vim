@@ -1,4 +1,4 @@
-" This dotfile is for Ubuntu-20.04 nvim in WS2.
+"This dotfile is for Ubuntu-20.04 nvim in WS2.
 " Create from vimrc in WSL2 Ubuntu-20.04
 
 """basic setting
@@ -11,6 +11,9 @@ set autochdir " auto mv to current file's dir
 set hidden " change buffer with file unsave
 filetype on
 set vb t_vb= " no error bell
+
+"""auto go to last edit
+au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 
 """show setting
 set number
@@ -47,6 +50,10 @@ set smartcase
 nnoremap /<CR> :nohlsearch<CR>
 nnoremap n nzz
 nnoremap N Nzz
+
+""" <C-a> has been used by tmux
+nnoremap <C-C> <C-A>
+" nnoremap <C-X> <C-X>
 
 """relax map
 nnoremap j gj
@@ -148,8 +155,13 @@ call plug#begin('~/.config/nvim/plugged')
 
     " git
     Plug 'airblade/vim-gitgutter'
-    nmap <leader>g :GitGutterToggle<CR>
+    nmap <leader>gt :GitGutterToggle<CR>
     Plug 'tpope/vim-fugitive'
+
+    " Goyo and limelight
+    Plug 'junegunn/goyo.vim'
+    nmap <leader>gy :Goyo<CR>
+    xmap <leader>gy :Goyo<CR>
 
     " Tagbar 
     Plug 'majutsushi/tagbar'
@@ -159,6 +171,11 @@ call plug#begin('~/.config/nvim/plugged')
     " Plug 'scrooloose/nerdtree'
     " map <leader>f :NERDTreeToggle<CR>
     " let NERDTreeShowHidden=1
+
+    " easy motion
+    Plug 'easymotion/vim-easymotion'
+    let g:EasyMotion_smartcase = 1
+    nnoremap f <Plug>(easymotion-s)
     
     " fzf
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -176,6 +193,7 @@ call plug#begin('~/.config/nvim/plugged')
     nmap <leader>mv :MarkdownPreview<CR>
     nmap <leader>mx :StopMarkdownPreview<CR>
     Plug 'ferrine/md-img-paste.vim'
+    " Plug 'ferrine/md-img-paste.vim', { 'as': 'md-img-paste', 'for': 'markdown' }
     autocmd FileType markdown nmap <buffer><silent> <leader>mp :call mdip#MarkdownClipboardImage()<CR>
 
     " conquer of completion
