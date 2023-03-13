@@ -281,7 +281,7 @@ call plug#begin('~/.vim/plugged')
     " equal to <tab> in vscode
     imap <C-j> <Plug>(coc-snippets-expand-jump)
 
-    " " coc-translator
+    " " coc-treplace
     " :CocInstall coc-translator
     " " popup
     " nmap <Leader>yy <Plug>(coc-translator-p)

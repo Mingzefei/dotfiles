@@ -17,5 +17,6 @@
     "UltiSnips",
     "~/.config/nvim/my_snippets/",
     "~/.config/nvim/plugged/vim-snippets/"
-  ]
+  ],
+  "snippets.ultisnips.pythonPrompt": false
 }

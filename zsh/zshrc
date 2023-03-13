@@ -143,8 +143,8 @@ alias hugo-server='echo "http://localhost:8000" && hugo server --bind 0.0.0.0 --
 # alias hugo-server='hugo server --bind ${hostip} --baseURL=http://${hostip} -p 1420'
 # WSL2 CUDA
 export LD_LIBRARY_PATH=/usr/lib/wsl/lib:$LD_LIBRARY_PATH
-# WSL2 display (using x410)
-export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
+# WSL2 display (using x410) # using WSLg now
+# export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -154,3 +154,19 @@ export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}
 
 # local
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/ming/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/ming/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/ming/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/ming/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+conda activate ming
