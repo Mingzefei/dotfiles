@@ -1,8 +1,7 @@
-# WSL1
-# [https]
-# 	proxy = 127.0.0.1:7890
-# [http]
-# 	proxy = 127.0.0.1:7890
+[https]
+	proxy = $hostip_with_port
+[http]
+	proxy = $hostip_with_port
 [core]
 	quotepath = false
     editor = vim
