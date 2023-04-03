@@ -156,10 +156,10 @@ Plug 'vim-autoformat/vim-autoformat'
 autocmd BufWritePre * :Autoformat
 
 " markdown
-Plug 'plasticboy/vim-markdown'
-let g:tagbar_type_markdown          = {'ctagstype' : 'markdown', 'kinds' : ['h:headings',],'sort' : 0}
-let g:vim_markdown_list_item_indent = 2
-let g:vim_markdown_math             = 1
+" Plug 'plasticboy/vim-markdown'
+" let g:tagbar_type_markdown          = {'ctagstype' : 'markdown', 'kinds' : ['h:headings',],'sort' : 0}
+" let g:vim_markdown_list_item_indent = 2
+" let g:vim_markdown_math             = 1
 "" table
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
 "" usage :TableModeToggle
@@ -171,7 +171,9 @@ nmap <leader>mx :StopMarkdownPreview<CR>
 
 " ipynb
 " autocmd BufNewFile,BufRead *.ipynb Plug 'luk400/vim-jukit'
-" Plug 'luk400/vim-jukit'
+Plug 'luk400/vim-jukit'
+let g:jukit_mappings_ext_enabled = ['ipynb'] " enable the mappings only in .ipynb files
+let g:jukit_notebook_viewer = 'code' " command to open .ipynb files, by default jupyter-notebook is used.
 
 " conquer of completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -191,7 +193,8 @@ let g:coc_global_extensions = [
             \'coc-tsserver',
             \'coc-python',
             \'coc-pyright',
-            \'coc-clangd',
+            \'coc-todolist',
+            \'coc-todo-tree',
             \'coc-cmake',]
 
 " Use tab for trigger completion with characters ahead and navigate.
@@ -219,6 +222,12 @@ inoremap <silent><expr> <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-k>"
 
 " Use <C-o> to trigger completion.
 inoremap <silent><expr> <C-o> coc#refresh()
+
+"" snippets
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
 
 " Use `[d` and `]d` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
@@ -266,7 +275,7 @@ nmap <leader>ac  <Plug>(coc-codeaction-cursor)
 " Remap keys for apply code actions affect whole buffer
 nmap <leader>as  <Plug>(coc-codeaction-source)
 " Apply the most preferred quickfix action to fix diagnostic on the current line
-nmap <leader>qf  <Plug>(coc-fix-current)
+" nmap <leader>qf  <Plug>(coc-fix-current)
 
 " coc-explorer: open explorer by <leader>e
 nnoremap <leader>e :CocCommand explorer<CR>
