@@ -11,6 +11,7 @@ set autochdir " auto mv to current file's dir
 set hidden " change buffer with file unsave
 filetype on
 set vb t_vb= " no error bell
+syntax on " syntax highlight
 
 """auto go to last edit
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
@@ -153,7 +154,7 @@ Plug 'godlygeek/tabular'
 let g:python3_host_prog="/usr/bin/python3"
 Plug 'vim-autoformat/vim-autoformat'
 " usage :Autoformat
-autocmd BufWritePre * :Autoformat
+" autocmd BufWritePre * :Autoformat
 
 " markdown
 " Plug 'plasticboy/vim-markdown'
@@ -171,9 +172,9 @@ nmap <leader>mx :StopMarkdownPreview<CR>
 
 " ipynb
 " autocmd BufNewFile,BufRead *.ipynb Plug 'luk400/vim-jukit'
-Plug 'luk400/vim-jukit'
-let g:jukit_mappings_ext_enabled = ['ipynb'] " enable the mappings only in .ipynb files
-let g:jukit_notebook_viewer = 'code' " command to open .ipynb files, by default jupyter-notebook is used.
+" Plug 'luk400/vim-jukit'
+" let g:jukit_mappings_ext_enabled = ['ipynb'] " enable the mappings only in .ipynb files
+" let g:jukit_notebook_viewer = 'code' " command to open .ipynb files, by default jupyter-notebook is used.
 
 " conquer of completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
