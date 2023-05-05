@@ -115,7 +115,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'github/copilot.vim'
 let g:copilot_proxy = expand('$hostip').':7890'
 
-" git
+" git and lazygit
 Plug 'airblade/vim-gitgutter'
 nnoremap ]g               : GitGutterNextHunk<CR>
 nnoremap [g               : GitGutterPrevHunk<CR>
@@ -123,6 +123,8 @@ nnoremap <leader>gp       : GitGutterPreviewHunk<CR>
 nnoremap <leader>gs       : GitGutterStageHunk<CR>
 nnoremap <leader>gu       : GitGutterUndoHunk<CR>
 Plug 'tpope/vim-fugitive'
+noremap \g :Git<CR>
+noremap <c-g> :tabe<CR>:-tabmove<CR>:term lazygit<CR>
 
 " Goyo and limelight
 Plug 'junegunn/goyo.vim'
