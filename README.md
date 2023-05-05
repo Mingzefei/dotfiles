@@ -8,19 +8,22 @@ TODO
 
 ## Content
 
-- [ ] zsh and config
+- [x] zsh and config
   - zsh
   - oh-my-zsh
   - p10k themes
-- [ ] git
+- [x] git
+  - lazygit: use lazygit in terminal, nvim and ranger
 - [ ] fzf
-- [ ] vim and config
+- [x] vim and config
   - vim plugins
   - snippets
   - vimrc
-- [ ] tmux and config
+- [x] tmux and config
   - tmux
   - plugins
   - .tmux.conf
+- [x] ranger
 - anaconda
 - fanyi
+
