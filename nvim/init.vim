@@ -68,6 +68,10 @@ nnoremap <C-w>x <C-w>c
 nnoremap <C-w>- <C-w>s
 nnoremap <C-w>= <C-w>v
 
+""" term
+nnoremap <C-w>t :tabe<CR>:term<CR>
+tnoremap jk <C-\><C-n>
+
 
 """relax map
 nnoremap j gj
