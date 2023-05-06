@@ -143,8 +143,6 @@ alias unproxy='
 # hugo
 alias hugo-server='echo "http://localhost:8000" && hugo server --bind 0.0.0.0 --baseURL=http://0.0.0.0 -p 8000'
 # alias hugo-server='hugo server --bind ${hostip} --baseURL=http://${hostip} -p 1420'
-# WSL2 CUDA
-export LD_LIBRARY_PATH=/usr/lib/wsl/lib:$LD_LIBRARY_PATH
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -170,4 +168,8 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+# cuda
+export PATH=/usr/local/cuda-11.8/bin${PATH:+:${PATH}}
+export LD_LIBRARY_PATH=/usr/local/cuda-11.8/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 
