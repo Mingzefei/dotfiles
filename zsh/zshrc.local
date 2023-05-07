@@ -20,7 +20,7 @@ export onedirve='/mnt/c/Users/Hua/OneDrive'
 export od='/mnt/c/Users/Hua/OneDrive'
 alias ww='cd /mnt/c/Users/Hua/win_workbench'
 alias wd='cd /mnt/c/Users/Hua/Desktop'
-alias note='cd /mnt/c/Users/Hua/OneDrive/note_prom'
+alias note='cd /mnt/c/Users/Hua/win_workbench/my_note'
 alias crs='cd /mnt/c/Users/Hua/OneDrive/研一（下）'
 ## ubutun
 alias uw='cd ~/ubt_workbench'
