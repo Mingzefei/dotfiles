@@ -25,6 +25,7 @@ alias crs='cd /mnt/c/Users/Hua/OneDrive/研一（下）'
 ## ubutun
 alias uw='cd ~/ubt_workbench'
 alias blog='cd /home/ming/ubt_workbench/my_blog'
+alias dot='cd /home/ming/.dotfiles'
 
 
 # software from windows
