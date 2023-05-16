@@ -145,6 +145,9 @@ sed -i -E "s/ProxyCommand nc -X connect -x [0-9]+\.[0-9]+\.[0-9]+\.[0-9]+:[0-9]+
 sed -i -E "s/socks5 [0-9]+\.[0-9]+\.[0-9]+\.[0-9]+ [0-9]+/socks5 ${hostip} ${proxyPort}/" ~/.proxychains/proxychains.conf
 sed -i -E "s/socks4 [0-9]+\.[0-9]+\.[0-9]+\.[0-9]+ [0-9]+/socks4 ${hostip} ${proxyPort}/" ~/.proxychains/proxychains.conf
 sed -i -E "s/http [0-9]+\.[0-9]+\.[0-9]+\.[0-9]+ [0-9]+/http ${hostip} ${proxyPort}/" ~/.proxychains/proxychains.conf
+alias pc='proxychains4'
+## .aicommit
+sed -i -E "s/proxy=http:\/\/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+:[0-9]+/proxy=http:\/\/${hostip}:${proxyPort}/" ~/.aicommits
 
 # hugo
 alias hugo-server='echo "http://localhost:8000" && hugo server --bind 0.0.0.0 --baseURL=http://0.0.0.0 -p 8000'
