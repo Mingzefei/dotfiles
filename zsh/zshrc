@@ -139,8 +139,12 @@ alias unproxy='
     sudo sed -i -e "/Acquire::http::Proxy/d" /etc/apt/apt.conf.d/proxy.conf;
     sudo sed -i -e "/Acquire::https::Proxy/d" /etc/apt/apt.conf.d/proxy.conf;
 '
-## modify .ssh/config for github
-sed -i -E "s/ProxyCommand nc -X connect -x [0-9]+\.[0-9]+\.[0-9]+\.[0-9]+:[0-9]+ %h %p/ProxyCommand nc -X connect -x ${hostip}:${porxyPort} %h %p/" ~/.ssh/config
+## .ssh/config for github
+sed -i -E "s/ProxyCommand nc -X connect -x [0-9]+\.[0-9]+\.[0-9]+\.[0-9]+:[0-9]+ %h %p/ProxyCommand nc -X connect -x ${hostip}:${proxyPort} %h %p/" ~/.ssh/config
+## .proxychains/proxychains.conf 
+sed -i -E "s/socks5 [0-9]+\.[0-9]+\.[0-9]+\.[0-9]+ [0-9]+/socks5 ${hostip} ${proxyPort}/" ~/.proxychains/proxychains.conf
+sed -i -E "s/socks4 [0-9]+\.[0-9]+\.[0-9]+\.[0-9]+ [0-9]+/socks4 ${hostip} ${proxyPort}/" ~/.proxychains/proxychains.conf
+sed -i -E "s/http [0-9]+\.[0-9]+\.[0-9]+\.[0-9]+ [0-9]+/http ${hostip} ${proxyPort}/" ~/.proxychains/proxychains.conf
 
 # hugo
 alias hugo-server='echo "http://localhost:8000" && hugo server --bind 0.0.0.0 --baseURL=http://0.0.0.0 -p 8000'
