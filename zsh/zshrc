@@ -125,10 +125,10 @@ alias cl='clip.exe'
 # export hostip=$(ifconfig lo | grep -oP '(?<=inet\ ).+(?=\ \ netmask)') # WSL1
 export hostip=$(cat /etc/resolv.conf |grep -oP '(?<=nameserver\ ).*') # WSL2
 export proxyPort=7890
+export https_proxy="http://${hostip}:${proxyPort}"
+export http_proxy="http://${hostip}:${proxyPort}"
+export all_proxy="http://${hostip}:${proxyPort}"
 alias proxy='  
-    export https_proxy="http://${hostip}:${proxyPort}";
-    export http_proxy="http://${hostip}:${proxyPort}";
-    export all_proxy="http://${hostip}:${proxyPort}";
     echo -e "Acquire::http::Proxy \"http://${hostip}:${proxyPort}\";" | sudo tee -a /etc/apt/apt.conf.d/proxy.conf > /dev/null;
     echo -e "Acquire::https::Proxy \"http://${hostip}:${proxyPort}\";" | sudo tee -a /etc/apt/apt.conf.d/proxy.conf > /dev/null;
 '
@@ -145,7 +145,7 @@ sed -i -E "s/ProxyCommand nc -X connect -x [0-9]+\.[0-9]+\.[0-9]+\.[0-9]+:[0-9]+
 sed -i -E "s/socks5 [0-9]+\.[0-9]+\.[0-9]+\.[0-9]+ [0-9]+/socks5 ${hostip} ${proxyPort}/" ~/.proxychains/proxychains.conf
 sed -i -E "s/socks4 [0-9]+\.[0-9]+\.[0-9]+\.[0-9]+ [0-9]+/socks4 ${hostip} ${proxyPort}/" ~/.proxychains/proxychains.conf
 sed -i -E "s/http [0-9]+\.[0-9]+\.[0-9]+\.[0-9]+ [0-9]+/http ${hostip} ${proxyPort}/" ~/.proxychains/proxychains.conf
-alias pc='proxychains4'
+alias p='proxychains4'
 ## .aicommit
 sed -i -E "s/proxy=http:\/\/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+:[0-9]+/proxy=http:\/\/${hostip}:${proxyPort}/" ~/.aicommits
 
@@ -159,8 +159,14 @@ alias hugo-server='echo "http://localhost:8000" && hugo server --bind 0.0.0.0 --
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [ -f ~/.p10k.zsh ] && source ~/.p10k.zsh
 
+# ~/.profile
+[ -f ~/.profile ] && source ~/.profile
+
 # local
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
+# env
+[ -f ~/.env ] && source ~/.env
 
 # cuda
 export PATH=/usr/local/cuda-11.8/bin${PATH:+:${PATH}}
