@@ -111,9 +111,15 @@ if system('uname -r') =~ "microsoft"
 endif
 
 
-
 " Plug
 call plug#begin('~/.config/nvim/plugged')
+
+" chatgpt
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'MunifTanjim/nui.nvim'
+Plug 'jackMort/ChatGPT.nvim'
+
 
 " github copilot
 Plug 'github/copilot.vim'
@@ -320,6 +326,11 @@ Plug 'tomasiser/vim-code-dark'
 let g:airline_theme = 'codedark'
 
 call plug#end()
+
+lua <<EOF
+-- chat gpt
+require("chatgpt").setup()
+EOF
 
 colorscheme codedark
 
