@@ -103,12 +103,13 @@ nnoremap <leader>s :set spell!<CR>
 "     augroup END
 " endif
 "" clip.exe for wsl2
-if system('uname -r') =~ "microsoft"
-    augroup Yank
-        autocmd!
-        autocmd TextYankPost * :call system('/mnt/c/windows/system32/clip.exe ',@")
-    augroup END
-endif
+" if system('uname -r') =~ "microsoft"
+"     augroup Yank
+"         autocmd!
+"         autocmd TextYankPost * :call system('/mnt/c/windows/system32/clip.exe ',@")
+"     augroup END
+" endif
+set clipboard=unnamedplus
 
 
 " Plug
@@ -167,6 +168,20 @@ let g:python3_host_prog="/usr/bin/python3"
 Plug 'vim-autoformat/vim-autoformat'
 " usage :Autoformat
 " autocmd BufWritePre * :Autoformat
+
+" latex
+Plug 'lervag/vimtex'
+let g:tex_flavor = 'latex'
+let g:vimtex_quickfix_mode = 0 " use `:copen` to open quickfix window
+" use `:VimtexTocOpen` to open toc window
+let g:vimtex_toc_config = {
+\ 'name' : 'TOC',
+\ 'layers' : ['content', 'todo', 'include'],
+\ 'split_width' : 25,
+\ 'todo_sorted' : 0,
+\ 'show_help' : 1,
+\ 'show_numbers' : 1,
+\}
 
 " markdown
 " Plug 'plasticboy/vim-markdown'
@@ -327,10 +342,8 @@ let g:airline_theme = 'codedark'
 
 call plug#end()
 
-lua <<EOF
--- chat gpt
-require("chatgpt").setup()
-EOF
+
+lua require('chatgpt').setup()
 
 colorscheme codedark
 

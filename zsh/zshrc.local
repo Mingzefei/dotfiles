@@ -9,8 +9,9 @@ git config --global http.proxy "http://${hostip}:${proxyPort}"
 git config --global https.proxy "http://${hostip}:${proxyPort}"
 
 # BROWSER
-export BROWSER='/mnt/c/Program Files/Google/Chrome/Application/chrome.exe'
-# export BROWSER='/mnt/c/Windows/explorer.exe'
+# export BROWSER='/mnt/c/Program Files/Google/Chrome/Application/chrome.exe'
+# export BROWSER='google-chrome'
+export BROWSER="/mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"
 
 # relax and workbench
 ## windows
@@ -39,11 +40,13 @@ alias ty='/mnt/c/Users/Hua/AppData/Local/Programs/Typora/Typora.exe'
 alias ve='/mnt/c/Users/Hua/Tools/VESTA/VESTA.exe'
 # EXPLORER
 alias ex='/mnt/c/Windows/explorer.exe'
-# Word
+# Office
 alias word='/mnt/c/Program\ Files/Microsoft\ Office/root/Office16/WINWORD.EXE'
 alias excel='/mnt/c/Program\ Files/Microsoft\ Office/root/Office16/EXCEL.EXE'
 alias ppt='/mnt/c/Program\ Files/Microsoft\ Office/root/Office16/POWERPNT.EXE'
 alias visio='/mnt/c/Program\ Files/Microsoft\ Office/root/Office16/VISIO.EXE'
+# Matlab
+alias matlab='/mnt/c/Program\ Files/MATLAB/R2021b/bin/matlab.exe'
 
 # software from ubutun
 # NEOVIM
