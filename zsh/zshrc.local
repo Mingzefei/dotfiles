@@ -1,9 +1,10 @@
 # ming, ROG13, zshrc.local
+export win_user='30577'
 
 # proxy
 # $hostip and $proxyPort are defined in zshrc
 ## proxy for vscode
-sed -i "s/http\.proxy.*/http.proxy\":\"http:\/\/${hostip}:${proxyPort}\",/" /mnt/c/Users/Hua/AppData/Roaming/Code/User/settings.json
+sed -i "s/http\.proxy.*/http.proxy\":\"http:\/\/${hostip}:${proxyPort}\",/" /mnt/c/Users/${win_user}/AppData/Roaming/Code/User/settings.json
 ## proxy for gitconfig
 git config --global http.proxy "http://${hostip}:${proxyPort}"
 git config --global https.proxy "http://${hostip}:${proxyPort}"
@@ -15,42 +16,48 @@ export BROWSER="/mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe
 
 # relax and workbench
 ## windows
-export win_desktop='/mnt/c/Users/Hua/Desktop'
-export wd='/mnt/c/Users/Hua/Desktop'
-export onedirve='/mnt/c/Users/Hua/OneDrive'
-export od='/mnt/c/Users/Hua/OneDrive'
-alias ww='cd /mnt/c/Users/Hua/win_workbench'
-alias wd='cd /mnt/c/Users/Hua/Desktop'
-alias note='cd /mnt/c/Users/Hua/win_workbench/my_note'
-alias crs='cd /mnt/c/Users/Hua/OneDrive/研一（下）'
+export win_desktop="/mnt/c/Users/${win_user}/Desktop"
+export wd="/mnt/c/Users/${win_user}/Desktop"
+export onedirve="/mnt/c/Users/${win_user}/OneDrive"
+export od="/mnt/c/Users/${win_user}/OneDrive"
+export ww="/mnt/c/Users/${win_user}/win_workbench"
+export wd="/mnt/c/Users/${win_user}/Desktop"
+export note="/mnt/c/Users/${win_user}/win_workbench/my_note"
+export crs="/mnt/c/Users/${win_user}/OneDrive/研二"
+alias ww="cd ${ww}"
+alias wd="cd ${wd}"
+alias note="cd ${note}"
+alias crs="cd ${crs}"
 ## ubutun
-alias uw='cd ~/ubt_workbench'
-alias blog='cd /home/ming/ubt_workbench/my_blog'
-alias dot='ra /home/ming/.dotfiles'
-
+export uw="/home/ming/ubt_workbench"
+export blog="/home/ming/ubt_workbench/my_blog"
+export dot="/home/ming/.dotfiles"
+alias uw="cd ${uw}"
+alias blog="cd ${blog}"
+alias dot="ra ${dot}"
 
 # software from windows
 # ANSYS
-alias ansys='/mnt/c/Program\ Files/ANSYS\ Inc/v211/ansys/bin/winx64/ANSYS211.exe'
-alias ansys21='/mnt/c/Program\ Files/ANSYS\ Inc/v211/ansys/bin/winx64/ANSYS211.exe'
-alias ansys18='/mnt/c/Program\ Files/ANSYS\ Inc/v180/ansys/bin/winx64/ANSYS180.exe'
+alias ansys="/mnt/c/Program\ Files/ANSYS\ Inc/v211/ansys/bin/winx64/ANSYS211.exe"
+alias ansys21="/mnt/c/Program\ Files/ANSYS\ Inc/v211/ansys/bin/winx64/ANSYS211.exe"
+alias ansys18="/mnt/c/Program\ Files/ANSYS\ Inc/v180/ansys/bin/winx64/ANSYS180.exe"
 # Typora
-alias ty='/mnt/c/Users/Hua/AppData/Local/Programs/Typora/Typora.exe'
+alias ty="/mnt/c/Users/${win_user}/AppData/Local/Programs/Typora/Typora.exe"
 # VESTA
-alias ve='/mnt/c/Users/Hua/Tools/VESTA/VESTA.exe'
+alias ve="/mnt/c/Users/${win_user}/Tools/VESTA/VESTA.exe"
 # EXPLORER
-alias ex='/mnt/c/Windows/explorer.exe'
+alias ex="/mnt/c/Windows/explorer.exe"
 # Office
-alias word='/mnt/c/Program\ Files/Microsoft\ Office/root/Office16/WINWORD.EXE'
-alias excel='/mnt/c/Program\ Files/Microsoft\ Office/root/Office16/EXCEL.EXE'
-alias ppt='/mnt/c/Program\ Files/Microsoft\ Office/root/Office16/POWERPNT.EXE'
-alias visio='/mnt/c/Program\ Files/Microsoft\ Office/root/Office16/VISIO.EXE'
+alias word="/mnt/c/Program\ Files/Microsoft\ Office/root/Office16/WINWORD.EXE"
+alias excel="/mnt/c/Program\ Files/Microsoft\ Office/root/Office16/EXCEL.EXE"
+alias ppt="/mnt/c/Program\ Files/Microsoft\ Office/root/Office16/POWERPNT.EXE"
+alias visio="/mnt/c/Program\ Files/Microsoft\ Office/root/Office16/VISIO.EXE"
 # Matlab
-alias matlab='/mnt/c/Program\ Files/MATLAB/R2021b/bin/matlab.exe'
+alias matlab="/mnt/c/Program\ Files/MATLAB/R2021b/bin/matlab.exe"
 
 # software from ubutun
 # NEOVIM
-alias v='nvim'
+alias v="nvim"
 # tex live
 export PATH=$PATH:/usr/local/texlive/2022/bin/x86_64-linux
 # anaconda
