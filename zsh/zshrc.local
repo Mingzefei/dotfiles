@@ -53,13 +53,15 @@ alias excel='/mnt/c/Program\ Files/Microsoft\ Office/root/Office16/EXCEL.EXE'
 alias ppt='/mnt/c/Program\ Files/Microsoft\ Office/root/Office16/POWERPNT.EXE'
 alias visio='/mnt/c/Program\ Files/Microsoft\ Office/root/Office16/VISIO.EXE'
 # Matlab
-alias matlab='/mnt/c/Program\ Files/MATLAB/R2021b/bin/matlab.exe'
+alias matlab='/mnt/c/Program\ Files/MATLAB/R2023a/bin/matlab.exe'
 
 # software from ubutun
 # NEOVIM
 alias v='nvim'
 # tex live
-export PATH=$PATH:/usr/local/texlive/2022/bin/x86_64-linux
+export PATH=/usr/local/texlive/2023/bin/x86_64-linux:$PATH
+export MANPATH=/usr/local/texlive/2023/texmf-dist/doc/man:$MANPATH
+export INFOPATH=/usr/local/texlive/2023/texmf-dist/doc/info:$INFOPATH
 # anaconda
 # >>> conda initialize >>>
 # # !! Contents within this block are managed by 'conda init' !!
