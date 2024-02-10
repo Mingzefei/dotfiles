@@ -21,14 +21,14 @@ set number
 set relativenumber
 set cursorline " high light current line
 set scrolloff=6 " 6 lines free for bottom and top
-if &term =~ "xterm" " Set cursor shape and color
-    " INSERT mode
-    let &t_SI = "\<Esc>[6 q"
-    " REPLACE mode
-    let &t_SR = "\<Esc>[3 q"
-    " NORMAL mode
-    let &t_EI = "\<Esc>[2 q"
-endif
+" ifj&term =~ "xterm" " Set cursor shape and color
+"     " INSERT mode
+"     let &t_SI = "\<Esc>[6 q"
+"     " REPLACE mode
+"     let &t_SR = "\<Esc>[3 q"
+"     " NORMAL mode
+"     let &t_EI = "\<Esc>[2 q"
+" endif
 
 """tab, indent and fold
 set smartindent " indent smartly when start a new line
@@ -88,27 +88,13 @@ source ~/.config/nvim/my_snippets/my_vim_snippets
 " source ~/.vim/my_snippets/my_vim_snippets
 
 "" fy word (need fanyi)
-nmap <Leader>yy :!fanyi <C-R><C-W><CR>
+" nmap <Leader>yy :!fanyi <C-R><C-W><CR>
 " fanyi input word(s)
-nmap <Leader>yi :!fanyi
+" nmap <Leader>yi :!fanyi
 
 "" spell check
 nnoremap <leader>s :set spell!<CR>
 
-"" clip.exe for wsl1
-" if system('uname -r') =~ "Microsoft"
-"     augroup Yank
-"     autocmd!
-"     autocmd TextYankPost * :call system('/mnt/c/windows/system32/clip.exe ',@")
-"     augroup END
-" endif
-"" clip.exe for wsl2
-" if system('uname -r') =~ "microsoft"
-"     augroup Yank
-"         autocmd!
-"         autocmd TextYankPost * :call system('/mnt/c/windows/system32/clip.exe ',@")
-"     augroup END
-" endif
 set clipboard=unnamedplus
 
 
@@ -116,10 +102,10 @@ set clipboard=unnamedplus
 call plug#begin('~/.config/nvim/plugged')
 
 " chatgpt
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'MunifTanjim/nui.nvim'
-Plug 'jackMort/ChatGPT.nvim'
+" Plug 'nvim-lua/plenary.nvim'
+" Plug 'nvim-telescope/telescope.nvim'
+" Plug 'MunifTanjim/nui.nvim'
+" Plug 'jackMort/ChatGPT.nvim'
 
 
 " github copilot
@@ -206,6 +192,7 @@ nmap <leader>mx :StopMarkdownPreview<CR>
 " conquer of completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+let g:coc_disable_staruo_waning = 1
 let g:coc_global_extensions = [
             \'coc-marketplace',
             \'coc-highlight',
@@ -343,7 +330,7 @@ let g:airline_theme = 'codedark'
 call plug#end()
 
 
-lua require('chatgpt').setup()
+" lua require('chatgpt').setup()
 
 colorscheme codedark
 

@@ -1,5 +1,6 @@
 # ming, ROG13, zshrc.local
 export win_user='30577'
+export DOTFILES_PATH='/home/ming/.dotfiles'
 
 # proxy
 # $hostip and $proxyPort are defined in zshrc
@@ -35,12 +36,16 @@ export dot="/home/ming/.dotfiles"
 alias uw='cd ${uw}'
 alias blog='cd ${blog}'
 alias dot='ra ${dot}'
+alias tnew='tmux new -s'
+alias ta='tmux attach -t'
+alias lg='lazygit'
+alias v='nvim'
 
 # software from windows
-# ANSYS
-alias ansys='/mnt/c/Program\ Files/ANSYS\ Inc/v211/ansys/bin/winx64/ANSYS211.exe'
-alias ansys21='/mnt/c/Program\ Files/ANSYS\ Inc/v211/ansys/bin/winx64/ANSYS211.exe'
-alias ansys18='/mnt/c/Program\ Files/ANSYS\ Inc/v180/ansys/bin/winx64/ANSYS180.exe'
+# # ANSYS
+# alias ansys='/mnt/c/Program\ Files/ANSYS\ Inc/v211/ansys/bin/winx64/ANSYS211.exe'
+# alias ansys21='/mnt/c/Program\ Files/ANSYS\ Inc/v211/ansys/bin/winx64/ANSYS211.exe'
+# alias ansys18='/mnt/c/Program\ Files/ANSYS\ Inc/v180/ansys/bin/winx64/ANSYS180.exe'
 # Typora
 alias ty='/mnt/c/Users/${win_user}/AppData/Local/Programs/Typora/Typora.exe'
 # VESTA
@@ -56,33 +61,41 @@ alias visio='/mnt/c/Program\ Files/Microsoft\ Office/root/Office16/VISIO.EXE'
 alias matlab='/mnt/c/Program\ Files/MATLAB/R2023a/bin/matlab.exe'
 
 # software from ubutun
-# NEOVIM
-alias v='nvim'
-# tex live
-export PATH=/usr/local/texlive/2023/bin/x86_64-linux:$PATH
-export MANPATH=/usr/local/texlive/2023/texmf-dist/doc/man:$MANPATH
-export INFOPATH=/usr/local/texlive/2023/texmf-dist/doc/info:$INFOPATH
+# # tex live
+# export PATH=/usr/local/texlive/2023/bin/x86_64-linux:$PATH
+# export MANPATH=/usr/local/texlive/2023/texmf-dist/doc/man:$MANPATH
+# export INFOPATH=/usr/local/texlive/2023/texmf-dist/doc/info:$INFOPATH
 # anaconda
 # >>> conda initialize >>>
 # # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/ming/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/ming/software/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/ming/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/ming/anaconda3/etc/profile.d/conda.sh"
+    if [ -f "/home/ming/software/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/ming/software/anaconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/home/ming/anaconda3/bin:$PATH"
+        export PATH="/home/ming/software/anaconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-export PATH=$PATH:/home/ming/anaconda3/bin
+export PATH=$PATH:/home/ming/software/anaconda3/bin
 conda activate ming # start with open
-# openmpi 3.1.4 path 
-OPENMPI=/home/ming/software/openmpi/3.1.4
-export LD_LIBRARY_PATH=$OPENMPI/lib:$LD_LIBRARY_PATH
-export PATH=$OPENMPI/bin:$PATH
-export INCLUDE=$OPENMPI/include:$INCLUDE
-export CPATH=$OPENMPI/include:$CPATH
-export MANPATH=$OPENMPI/share/man:$MANPATH
+# ranger
+# export RANGER_LOAD_DEFAULT_RC=FALSE # donot use default rc
+export VISUAL=nvim # use nvim as the default editor
+export PAGER=more # use more as the default pager
+export RANGER_CONFIG_DIR=${DOTFILES_PATH}/ranger # use the config in dotfiles
+# ra: use $RANGER_CONFIG_DIR as the config dir, and cd the last dir when exit
+function my_ranger {
+    temp_file="$(mktemp -t tmp.XXXXXX)"
+    ranger --confdir="$RANGER_CONFIG_DIR" \
+           --choosedir="$temp_file" \
+           "${@:-$(pwd)}"
+    if chosen_dir="$(cat -- "$temp_file")" && [ -n "$chosen_dir" ] && [ "$chosen_dir" != "$PWD" ]; then
+        cd -- "$chosen_dir"
+    fi
+    rm -f -- "$temp_file"
+}
+alias ra='my_ranger'
